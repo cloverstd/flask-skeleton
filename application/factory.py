@@ -16,6 +16,7 @@ def create_app(package_name=None, settings_override=None):
     register_logger(app)
     register_error_handle(app)
     register_hooks(app)
+    register_db(app)
     # if with_router:
     #     register_router(app)
     return app

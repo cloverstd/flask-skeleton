@@ -3,8 +3,8 @@
 # created by @cloverstd
 # created at 2016-06-23 14:38
 
-# import pkgutil
 from flask.blueprints import Blueprint
+from .tool import json_dumps
 
 
 def register_router(app, controllers):
@@ -41,6 +41,9 @@ class Output(object):
                 'message': self.message
             }
         }
+    @property
+    def json(self):
+        return json_dumps(self.show())
 
 
 class SuccessOutput(Output):

@@ -4,7 +4,7 @@
 # created at 2016-06-23 10:59
 
 import os
-
+import datetime as dt
 
 class Config(object):
 
@@ -21,3 +21,6 @@ class Config(object):
 
     PERMANENT_SESSION_LIFETIME = 3600 * 24 * 7
     SECRET_KEY = "secret key"
+
+    JWT_AUTH_URL_RULE = '/user/auth'
+    JWT_EXPIRATION_DELTA = dt.timedelta(seconds=3600 * 24)
