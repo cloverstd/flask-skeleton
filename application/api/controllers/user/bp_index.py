@@ -20,6 +20,6 @@ class Hello(AuthResource):
 
         res = say_hello.delay(args.n)
         app.logger.debug("task id: {}".format(res))
-        return SuccessOutput({
+        return self.success({
             'task-id': str(res)
         }, message="success")
