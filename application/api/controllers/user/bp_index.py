@@ -10,6 +10,7 @@ from .._base import AuthResource
 from application.tasks import say_hello
 from application.utils.helper import SuccessOutput
 
+
 @api.resource('/hello')
 class Hello(AuthResource):
 

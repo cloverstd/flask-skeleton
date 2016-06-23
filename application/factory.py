@@ -17,6 +17,7 @@ def create_app(package_name=None, settings_override=None):
     register_error_handle(app)
     register_hooks(app)
     register_db(app)
+    register_marshmallow(app)
     # if with_router:
     #     register_router(app)
     return app
@@ -83,6 +84,12 @@ def register_db(app):
     from .core import db
     from . import models
     db.init_app(app)
+
+
+def register_marshmallow(app):
+    from .core import ma
+    from . import schemas
+    ma.init_app(app)
 
 
 def register_hooks(app):
