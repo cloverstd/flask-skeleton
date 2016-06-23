@@ -7,7 +7,7 @@ from flask import Flask, g
 import time
 
 
-def create_app(package_name=None, settings_override=None, with_router=True):
+def create_app(package_name=None, settings_override=None):
 
     app = Flask(package_name or __name__, instance_relative_config=True)
 
@@ -16,9 +16,8 @@ def create_app(package_name=None, settings_override=None, with_router=True):
     register_logger(app)
     register_error_handle(app)
     register_hooks(app)
-    if with_router:
-        register_router(app)
-
+    # if with_router:
+    #     register_router(app)
     return app
 
 
@@ -121,7 +120,7 @@ def _import_submodules_from_package(package):
 
 def create_celery_app(app=None):
     from celery import Celery
-    app = app or create_app('flask-skeleton', with_router=False)
+    app = app or create_app('flask-skeleton')
     celery = Celery(__name__, broker=app.config['CELERY_BROKER_URL'])
     celery.conf.update(app.config)
     TaskBase = celery.Task

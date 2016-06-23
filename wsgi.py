@@ -3,9 +3,14 @@
 # created by @cloverstd
 # created at 2016-06-23 13:51
 
-from application.factory import create_app
+from werkzeug.serving import run_simple
+from werkzeug.wsgi import DispatcherMiddleware
 
-app = create_app()
+from application import frontend, api
 
-if __name__ == '__main__':
-    app.run()
+application = DispatcherMiddleware(frontend.create_app(), {
+    "/api": api.create_app()
+})
+
+if __name__ == "__main__":
+    run_simple('0.0.0.0', 5000, application, use_reloader=True, use_debugger=True)

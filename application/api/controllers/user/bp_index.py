@@ -14,4 +14,4 @@ from application.tasks import say_hello
 def hello(n=10):
     res = say_hello.delay(n)
     app.logger.debug("Task ID: {}".format(res))
-    return "user hello"
+    return "api user hello"

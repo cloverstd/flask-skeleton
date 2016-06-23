@@ -15,5 +15,12 @@ migrate = Migrate(app, db)
 manager.add_command('db', MigrateCommand)
 
 
+@manager.option('-h', '--host', dest="host", default="0.0.0.0", type=str)
+@manager.option('-p', '--port', dest="port", default=8080, type=int)
+def run(host, port):
+    from wsgi import application
+    from werkzeug.serving import run_simple
+    run_simple(host, port, application, use_reloader=True, use_debugger=True)
+
 if __name__ == '__main__':
     manager.run()

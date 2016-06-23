@@ -1,10 +1,10 @@
 # encoding: utf-8
 
 # created by @cloverstd
-# created at 2016-06-23 11:15
+# created at 2016-06-23 14:24
 
 from flask import Blueprint
-from ..tasks import say_hello
+from application.tasks import say_hello
 
 bp = Blueprint(
     'index',
@@ -16,4 +16,4 @@ bp = Blueprint(
 @bp.route('/hello')
 def hello():
     say_hello.delay(10)
-    return "hello"
+    return "api hello"
