@@ -1,0 +1,4 @@
+.idea
+*.pyc
+application/config/development.py
+application/config/production.py
