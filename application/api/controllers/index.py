@@ -4,7 +4,8 @@
 # created at 2016-06-23 14:24
 
 from flask import Blueprint
-from application.tasks import say_hello
+from ..helpers import Api
+from ._base import BaseResource
 
 bp = Blueprint(
     'index',
@@ -12,8 +13,11 @@ bp = Blueprint(
     url_prefix="",
 )
 
+api = Api(bp)
 
-@bp.route('/hello')
-def hello():
-    say_hello.delay(10)
-    return "api hello"
+
+@api.resource('/hello')
+class Hello(BaseResource):
+
+    def get(self):
+        return {'task': 'Say Hello'}

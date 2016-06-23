@@ -6,6 +6,7 @@
 import arrow
 import glob
 import os.path
+from json import dumps, loads
 
 
 def get_now(naive=True):
@@ -31,3 +32,11 @@ def get_bp_controller(f, name, prefix="bp_"):
     base_path = os.path.abspath(os.path.join(os.path.dirname(f)))
     modules = map(lambda x: os.path.basename(x)[:-3], glob.glob(os.path.join(base_path, '{}*.py'.format(prefix))))
     map(lambda x: __import__("{}.{}".format(name, x)), modules)
+
+
+def json_dumps(*args, **kwargs):
+    return dumps(*args, **kwargs)
+
+
+def json_loads(*args, **kwargs):
+    return loads(*args, **kwargs)

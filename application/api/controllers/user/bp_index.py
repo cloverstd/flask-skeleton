@@ -5,13 +5,20 @@
 
 from flask import current_app as app
 
-from ._base import bp
+from ._base import api
+from .._base import AuthResource
 from application.tasks import say_hello
+from application.utils.helper import SuccessOutput
 
+@api.resource('/hello')
+class Hello(AuthResource):
 
-@bp.route('/hello', defaults={'n': 10})
-@bp.route('/hello/<int:n>')
-def hello(n=10):
-    res = say_hello.delay(n)
-    app.logger.debug("Task ID: {}".format(res))
-    return "api user hello"
+    def get(self):
+        self.parser.add_argument('n', type=int, required=True, help="必填")
+        args = self.parser.parse_args()
+
+        res = say_hello.delay(args.n)
+        app.logger.debug("task id: {}".format(res))
+        return SuccessOutput({
+            'task-id': str(res)
+        }, message="success")

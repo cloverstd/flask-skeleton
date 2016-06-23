@@ -24,3 +24,31 @@ def _import_submodules_from_package(package):
                                                          prefix=package.__name__ + "."):
         modules.append(__import__(modname, fromlist="dummy"))
     return modules
+
+
+class Output(object):
+
+    def __init__(self, data, code, message):
+        self.data = data
+        self.code = code
+        self.message = message
+
+    def show(self):
+        return {
+            'data': self.data,
+            'meta': {
+                'code': self.code,
+                'message': self.message
+            }
+        }
+
+
+class SuccessOutput(Output):
+
+    def __init__(self, data=None, code=0, message=None):
+        super(SuccessOutput, self).__init__(data=data, code=code, message=message)
+
+
+class ErrorOutput(Output):
+    def __init__(self, code, message=None, data=None):
+        super(ErrorOutput, self).__init__(data=data, code=code, message=message)
