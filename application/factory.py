@@ -81,6 +81,7 @@ def register_db(app):
     :return:
     """
     from .core import db
+    from . import models
     db.init_app(app)
 
 

@@ -25,7 +25,7 @@ def register_jwt(app):
     from flask import make_response
 
     from .core import jwt
-    from ..models.user import User
+    from ..models.db_user import User
     from ..utils.helper import SuccessOutput, ErrorOutput
 
     @jwt.authentication_handler
